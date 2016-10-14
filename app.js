@@ -9,6 +9,7 @@ function reset(){
 }
 
 function compteur(){
+	clearInterval(Interval);
 	Interval = setInterval(function(){
 		time--;
 		var min = parseInt(time/60,10);
@@ -27,14 +28,14 @@ function compteur(){
 $("#playStop").on("click", function(){
 	if(!running){
 		clearInterval(Interval);
-	}else{
+	} else{
 		compteur();
 	}
 	running = !running;		
 });
 
 
-$("#reset").click(reset);
+$("#reset").on("click", function(){reset()});
 
 $("form").on("submit", function(){
 	event.preventDefault();
