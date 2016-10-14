@@ -1,5 +1,7 @@
 var Interval;
 var time;
+var min;
+var sec;
 
 $("form").on("submit", function(event){
 	event.preventDefault();
@@ -10,8 +12,8 @@ $("form").on("submit", function(event){
 function compteur(){
 	Interval = setInterval(function(){
 		time--;
-		var min = parseInt(time/60,10);
-		var sec = time - min*60;
+		min = parseInt(time/60,10);
+		sec = time - min*60;
 		if(time === 0 && min != 0){
 			min--;
 		} if(sec === 0 && min === 0){
@@ -27,7 +29,18 @@ $("#playstop").on("click", function(){
 	
 }); 
 
-$("#reset").click(function(){
+
+$('#reset').on('click', function(){
+	clearInterval(Interval);
+	$('input').val()
+	$("#minutes").text(0);
+	$("#secondes").text(0);
+	min = 0;
+	console.log(min);
+	sec = 0;
+});
+
+$("#zero").on("click", function(){
 	time = $('input').val();
-	compteur();
+	//compteur();
 });
