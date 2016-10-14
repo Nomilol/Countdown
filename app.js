@@ -14,7 +14,7 @@ Interval = setInterval(compteur, 1000);
 $("#playstop").on("click", function(){
 	clearInterval(Interval);		
 	
-});
+}); 
 
 
 
