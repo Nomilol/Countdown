@@ -1,19 +1,18 @@
 var Interval;
-var time;
-var min;
-var sec;
+var defaultTime = 90;
+var time = defaultTime;
+var running = false;
 
-$("form").on("submit", function(event){
-	event.preventDefault();
+function reset(){
 	time = $("input").val();
 	compteur();
-});
+}
 
 function compteur(){
 	Interval = setInterval(function(){
 		time--;
-		min = parseInt(time/60,10);
-		sec = time - min*60;
+		var min = parseInt(time/60,10);
+		var sec = time - min*60;
 		if(time === 0 && min != 0){
 			min--;
 		} if(sec === 0 && min === 0){
@@ -24,23 +23,20 @@ function compteur(){
 	}, 1000);
 }
 
-$("#playstop").on("click", function(){
-	clearInterval(Interval);		
-	
-}); 
 
-
-$('#reset').on('click', function(){
-	clearInterval(Interval);
-	$('input').val()
-	$("#minutes").text(0);
-	$("#secondes").text(0);
-	min = 0;
-	console.log(min);
-	sec = 0;
+$("#playStop").on("click", function(){
+	if(!running){
+		clearInterval(Interval);
+	}else{
+		compteur();
+	}
+	running = !running;		
 });
 
-$("#zero").on("click", function(){
-	time = $('input').val();
-	//compteur();
+
+$("#reset").click(reset);
+
+$("form").on("submit", function(){
+	event.preventDefault();
+	reset();
 });
